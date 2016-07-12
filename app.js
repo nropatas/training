@@ -9,6 +9,21 @@ const port = 3000;
 const knexfile = require('./knexfile');
 const knex = require('knex')(knexfile.development);
 
+function getLog () {
+    return new Promise((fulfill, reject) => {
+        knex.select('*')
+            .from('status')
+            .limit(10)
+            .orderBy('last_updated', 'desc')
+            .then((rows) => {
+                fulfill(rows);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+}
+
 app.get('/users(/:role)?', (req, res) => {
 
     let query = knex.select('*').from('users');
@@ -44,17 +59,17 @@ app.get('/status', (req, out) => {
     });
 });
 
-app.get('/status/log', (req, res) => {
-    knex.select('*')
-        .from('status')
-        .limit(10)
-        .orderBy('last_updated', 'desc')
-        .then((rows) => {
-            res.type('application/json');
-            res.write(JSON.stringify(rows));
-            res.end();
-        })
-        .catch(console.error);
+app.get('/status/log.json', (req, res) => {
+    getLog().then((rows) => {
+        res.type('application/json');
+        res.write(JSON.stringify(rows));
+        res.end();
+    })
+    .catch(console.err);
+});
+
+app.get('/status.log(.html)?', (req, res) => {
+
 });
 
 app.listen(port, () => {
