@@ -47,22 +47,6 @@ function getUsers (requestedRole) {
     });
 }
 
-// app.get('/users(/:role)?', (req, res) => {
-//     let query = knex.select('*').from('users');
-//
-//     if (req.params.role) {
-//         query.where({ role: req.params.role });
-//     }
-//
-//     query.map((row) => {
-//         res.write(row.name + '\n');
-//     })
-//     .then(() => {
-//         res.end();
-//     })
-//     .catch(console.error);
-// });
-
 app.get('/users(/:role)?.json', (req, res) => {
     getUsers(req.params.role)
         .then((rows) => {
