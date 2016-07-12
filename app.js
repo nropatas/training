@@ -30,21 +30,51 @@ function getLog () {
     });
 }
 
-app.get('/users(/:role)?', (req, res) => {
+function getUsers (requestedRole) {
+    return new Promise((fulfill, reject) => {
+        let query = knex.select('*').from('users');
 
-    let query = knex.select('*').from('users');
+        if (requestedRole) {
+            query.where({ role: requestedRole });
+        }
 
-    if (req.params.role) {
-        query.where({ role: req.params.role });
-    }
+        query.then((rows) => {
+            fulfill(rows);
+        })
+        .catch((err) => {
+            reject(err);
+        });
+    });
+}
 
-    query.map((row) => {
-        res.write(row.name + '\n');
-    })
-    .then(() => {
-        res.end();
-    })
-    .catch(console.error);
+// app.get('/users(/:role)?', (req, res) => {
+//     let query = knex.select('*').from('users');
+//
+//     if (req.params.role) {
+//         query.where({ role: req.params.role });
+//     }
+//
+//     query.map((row) => {
+//         res.write(row.name + '\n');
+//     })
+//     .then(() => {
+//         res.end();
+//     })
+//     .catch(console.error);
+// });
+
+app.get('/users(/:role)?.json', (req, res) => {
+    getUsers(req.params.role)
+        .then((rows) => {
+            res.type('application/json');
+            res.write(JSON.stringify(rows));
+            res.end();
+        })
+        .catch(console.error);
+});
+
+app.get('/users(/:role)?(.html)?', (req, res) => {
+
 });
 
 app.get('/status', (req, out) => {
