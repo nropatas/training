@@ -5,15 +5,22 @@ const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 const gulputil = require('gulp-util');
 const nodemon = require('gulp-nodemon');
+const concatCss = require('gulp-concat-css');
 
 gulp.task('lint', () => {
-    return gulp.src(['**/*.js', '!node_modules/**'])
+    return gulp.src(['**/*.js', '!node_modules/**', '!public/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('run', ['lint'], () => {
+gulp.task('concatCss', () => {
+    return gulp.src('assets/css/*.css')
+        .pipe(concatCss("style.css"))
+        .pipe(gulp.dest('public/css'));
+});
+
+gulp.task('run', ['lint', 'concatCss'], () => {
     nodemon({
         script: 'app.js',
     });
