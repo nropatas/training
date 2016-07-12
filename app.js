@@ -10,6 +10,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
+app.use('/public', express.static('public'));
 
 // database
 const knexfile = require('./knexfile');
