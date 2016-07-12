@@ -6,7 +6,6 @@ const mocha = require('gulp-mocha');
 const gulputil = require('gulp-util');
 const nodemon = require('gulp-nodemon');
 const concatCss = require('gulp-concat-css');
-const cleanCss = require('gulp-clean-css');
 const sequence = require('gulp-sequence');
 const cssnano = require('gulp-cssnano');
 
