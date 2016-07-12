@@ -58,7 +58,11 @@ app.get('/users(/:role)?.json', (req, res) => {
 });
 
 app.get('/users(/:role)?(.html)?', (req, res) => {
-
+    getUsers(req.params.role)
+        .then((rows) => {
+            res.render('users', { data: rows });
+        })
+        .catch(console.error);
 });
 
 app.get('/status', (req, out) => {
@@ -90,7 +94,6 @@ app.get('/status/log.json', (req, res) => {
 
 app.get('/status/log(.html)?', (req, res) => {
     getLog().then((rows) => {
-        console.log(rows);
         res.render('log', { data: rows });
     })
     .catch(console.error);
