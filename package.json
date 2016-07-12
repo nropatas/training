@@ -20,9 +20,14 @@
     "babel-eslint": "^6.1.2",
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.11",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-cssnano": "^2.1.2",
     "gulp-eslint": "^3.0.1",
+    "gulp-minify": "0.0.12",
     "gulp-mocha": "^2.2.0",
     "gulp-nodemon": "^2.1.0",
+    "gulp-sequence": "^0.4.5",
     "gulp-util": "^3.0.7"
   }
 }
