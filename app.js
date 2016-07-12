@@ -1,9 +1,15 @@
 'use strict';
 
+const port = 3000;
+
 const https = require('https');
+const path = require('path');
 const express = require('express');
 const app = express();
-const port = 3000;
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+app.engine('html', require('hbs').__express);
 
 // database
 const knexfile = require('./knexfile');
@@ -68,8 +74,8 @@ app.get('/status/log.json', (req, res) => {
     .catch(console.err);
 });
 
-app.get('/status.log(.html)?', (req, res) => {
-
+app.get('/status/log(.html)?', (req, res) => {
+    res.render('log', { id: 1 });
 });
 
 app.listen(port, () => {
