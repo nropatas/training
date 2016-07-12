@@ -4,6 +4,21 @@
     </head>
 
     <body>
-        {{id}}
+        <table>
+            <thead>
+                <tr>
+                    <th>last_updated</th>
+                    <th>status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                    <tr>
+                        <td>{{status}}</td>
+                        <td>{{last_updated}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </body>
 </html>

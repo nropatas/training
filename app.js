@@ -71,11 +71,15 @@ app.get('/status/log.json', (req, res) => {
         res.write(JSON.stringify(rows));
         res.end();
     })
-    .catch(console.err);
+    .catch(console.error);
 });
 
 app.get('/status/log(.html)?', (req, res) => {
-    res.render('log', { id: 1 });
+    getLog().then((rows) => {
+        console.log(rows);
+        res.render('log', { data: rows });
+    })
+    .catch(console.error);
 });
 
 app.listen(port, () => {
