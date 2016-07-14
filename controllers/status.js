@@ -2,7 +2,8 @@
 
 const model = require('../models/status');
 const https = require('https');
-let status;
+
+function status () {}
 
 status.prototype.insert = (req, out) => {
     let url = 'https://status.github.com/api/status.json';
@@ -39,4 +40,4 @@ status.prototype.logHtml = (req, res) => {
         .catch(console.error);
 };
 
-module.exports = status;
+module.exports = new status();

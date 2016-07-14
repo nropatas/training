@@ -1,7 +1,8 @@
 'use strict';
 
 const model = require('../models/users');
-let users;
+
+function users () {}
 
 users.prototype.resJson = (req, res) => {
     model.getUsers(req.params.role)
@@ -21,4 +22,4 @@ users.prototype.resHtml = (req, res) => {
         .catch(console.error);
 };
 
-module.exports = users;
+module.exports = new users();
