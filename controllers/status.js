@@ -17,13 +17,6 @@ module.exports.controller = (app) => {
                         out.end();
                     })
                     .catch(console.error);
-
-                // knex('status').insert({ status: json['status'], last_updated: json['last_updated'] })
-                //     .then(() => {
-                //         out.write('A new status is recorded.');
-                //         out.end();
-                //     })
-                //     .catch(console.error);
             });
         });
     });

@@ -4,7 +4,7 @@ const knexfile = require('../knexfile');
 const knex = require('knex')(knexfile.development);
 
 module.exports = {
-    getLog: function () {
+    getLog: () => {
         return new Promise((fulfill, reject) => {
             knex.select('*')
                 .from('status')
@@ -19,7 +19,7 @@ module.exports = {
         });
     },
 
-    insertNewStatus: function (jsonData) {
+    insertNewStatus: (jsonData) => {
         return new Promise((fulfill, reject) => {
             knex('status').insert({ status: jsonData['status'], last_updated: jsonData['last_updated'] })
                 .then(() => {

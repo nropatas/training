@@ -4,7 +4,7 @@ const knexfile = require('../knexfile');
 const knex = require('knex')(knexfile.development);
 
 module.exports = {
-    getUsers: function (requestedRole) {
+    getUsers: (requestedRole) => {
         return new Promise((fulfill, reject) => {
             let query = knex.select('*').from('users');
 
