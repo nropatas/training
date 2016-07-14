@@ -1,12 +1,11 @@
 'use strict';
 
-const knexfile = require('../knexfile');
-const knex = require('knex')(knexfile.development);
+const db = require('./db');
 
 module.exports = {
     getUsers: (requestedRole) => {
         return new Promise((fulfill, reject) => {
-            let query = knex.select('*').from('users');
+            let query = db.select('*').from('users');
 
             if (requestedRole) {
                 query.where({ role: requestedRole });

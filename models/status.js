@@ -1,12 +1,11 @@
 'use strict';
 
-const knexfile = require('../knexfile');
-const knex = require('knex')(knexfile.development);
+const db = require('./db');
 
 module.exports = {
     getLog: () => {
         return new Promise((fulfill, reject) => {
-            knex.select('*')
+            db.select('*')
                 .from('status')
                 .limit(10)
                 .orderBy('last_updated', 'desc')
@@ -21,7 +20,7 @@ module.exports = {
 
     insertNewStatus: (jsonData) => {
         return new Promise((fulfill, reject) => {
-            knex('status').insert({ status: jsonData['status'], last_updated: jsonData['last_updated'] })
+            db('status').insert({ status: jsonData['status'], last_updated: jsonData['last_updated'] })
                 .then(() => {
                     fulfill();
                 })
