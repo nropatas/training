@@ -218,7 +218,13 @@ describe('/status', () => {
                 http.get(`http://localhost:${port}/status`, () => {
                     http.get(`http://localhost:${port}/status/log.json`, (secondRes) => {
                         secondRes.on('data', (secondChunk) => {
-                            assert.notEqual(JSON.parse(firstChunk)[0]['id'], JSON.parse(secondChunk)[0]['id']);
+                            let firstJson = JSON.parse(firstChunk);
+                            let secondJson = JSON.parse(secondChunk);
+                            if (firstJson[0]) {
+                                assert.notEqual(firstJson[0]['id'], secondJson[0]['id']);
+                            } else {
+                                assert.isDefined(secondJson[0]);
+                            }
                             done();
                         });
                     });
