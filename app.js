@@ -3,7 +3,6 @@
 const port = 3000;
 
 const path = require('path');
-const fs = require('fs');
 const express = require('express');
 const app = express();
 
@@ -13,12 +12,7 @@ app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 app.use('/public', express.static('public'));
 
-fs.readdirSync('./controllers').forEach((file) => {
-    if (path.extname(file) === '.js') {
-        let route = require('./controllers/' + file);
-        route.controller(app);
-    }
-});
+app.use('/', require('./routes'));
 
 app.listen(app.get('port'), () => {
     console.log('Server started');

@@ -3,8 +3,8 @@
 const model = require('../models/status');
 const https = require('https');
 
-module.exports.controller = (app) => {
-    app.get('/status', (req, out) => {
+module.exports = {
+    insert: (req, out) => {
         let url = 'https://status.github.com/api/status.json';
 
         https.get(url, (res) => {
@@ -19,21 +19,21 @@ module.exports.controller = (app) => {
                     .catch(console.error);
             });
         });
-    });
+    },
 
-    app.get('/status/log.json', (req, res) => {
+    logJson: (req, res) => {
         model.getLog().then((rows) => {
             res.type('application/json');
             res.write(JSON.stringify(rows));
             res.end();
         })
         .catch(console.error);
-    });
+    },
 
-    app.get('/status/log(.html)?', (req, res) => {
+    logHtml: (req, res) => {
         model.getLog().then((rows) => {
             res.render('log', { data: rows });
         })
         .catch(console.error);
-    });
+    },
 };

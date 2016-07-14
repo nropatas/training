@@ -2,8 +2,8 @@
 
 const model = require('../models/users');
 
-module.exports.controller = (app) => {
-    app.get('/users(/:role)?.json', (req, res) => {
+module.exports = {
+    resJson: (req, res) => {
         model.getUsers(req.params.role)
             .then((rows) => {
                 res.type('application/json');
@@ -11,13 +11,13 @@ module.exports.controller = (app) => {
                 res.end();
             })
             .catch(console.error);
-    });
+    },
 
-    app.get('/users(/:role)?(.html)?', (req, res) => {
+    resHtml: (req, res) => {
         model.getUsers(req.params.role)
             .then((rows) => {
                 res.render('users', { data: rows });
             })
             .catch(console.error);
-    });
+    },
 };
