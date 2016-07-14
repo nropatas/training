@@ -15,9 +15,9 @@ module.exports = {
             query.then((rows) => {
                 fulfill(rows);
             })
-            .catch((err) => {
-                reject(err);
-            });
+                .catch((err) => {
+                    reject(err);
+                });
         });
     }
 };

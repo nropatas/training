@@ -22,18 +22,20 @@ module.exports = {
     },
 
     logJson: (req, res) => {
-        model.getLog().then((rows) => {
-            res.type('application/json');
-            res.write(JSON.stringify(rows));
-            res.end();
-        })
-        .catch(console.error);
+        model.getLog()
+            .then((rows) => {
+                res.type('application/json');
+                res.write(JSON.stringify(rows));
+                res.end();
+            })
+            .catch(console.error);
     },
 
     logHtml: (req, res) => {
-        model.getLog().then((rows) => {
-            res.render('log', { data: rows });
-        })
-        .catch(console.error);
+        model.getLog()
+            .then((rows) => {
+                res.render('log', { data: rows });
+            })
+            .catch(console.error);
     },
 };
