@@ -1,6 +1,6 @@
 'use strict';
 
-const knexfile = require('../knexfile');
-const knex = require('knex')(knexfile.development);
+const config = require('../config');
+const knex = require('knex')(config.get('db'));
 
 module.exports = knex;
