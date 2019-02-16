@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Log</title>
+        <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+    </head>
+
+    <body>
+        <table class="table log">
+            <thead>
+                <tr>
+                    <th>last_updated</th>
+                    <th>status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                    <tr>
+                        <td>{{status}}</td>
+                        <td>{{last_updated}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../public/js/bootstrap.js"></script>
+    </body>
+</html>

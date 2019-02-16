@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Users</title>
+        <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+    </head>
+
+    <body>
+        <table class="table users">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{name}}</td>
+                        <td>{{role}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../public/js/bootstrap.js"></script>
+    </body>
+</html>
